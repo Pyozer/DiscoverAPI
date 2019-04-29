@@ -1,0 +1,26 @@
+{
+  "name": "discover",
+  "version": "1.0.0",
+  "description": "Insta like for place",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Pyozer/DiscoverAPI.git"
+  },
+  "dependencies": {
+    "express": "^4.13.3"
+  },
+  "keywords": [
+    "api",
+    "discover"
+  ],
+  "author": "Efrei-CharbSlokDreaJCDylan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Pyozer/DiscoverAPI/issues"
+  },
+  "homepage": "https://github.com/Pyozer/DiscoverAPI#readme"
+}
