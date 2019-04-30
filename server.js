@@ -13,7 +13,7 @@ app.get('/hello', (req, res) => {
 app.get('/hello/:name', (req, res) => {
   return res.json({
     status: "succeed",
-    data: `Hello ${req.params.name}`
+    data: `Hello ${req.params.name}`,
     message: "201"
   });
 });
