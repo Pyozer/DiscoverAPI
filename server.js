@@ -37,7 +37,7 @@ const server = http.createServer((req, res) => {
   client.connect()
     .then(() => client.query('SELECT * FROM hellotable'))
     .then((result) => {
-      res.end(`${result.rows[0].name}\n`);
+      res.end(console.log(`${result.rows[0].name}\n`));
       client.end();
     })
     .catch(() => {
