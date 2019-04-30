@@ -24,7 +24,7 @@ app.listen(PORT, () =>
   console.log(`Example app listening on port ${PORT}!`),
 );
 
-onst http = require('http');
+const http = require('http');
 const { Client } = require('pg');
 
 const PORT = process.env.PORT || 5000;
