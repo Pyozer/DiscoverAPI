@@ -17,7 +17,6 @@ exports.getPool = () => {
     database: process.env.DB_DB,
     charset: 'utf8mb4'
   });
-  console.log(dbHost, dbUser, dbPwd, dbDB);
 
   return pool;
 }
