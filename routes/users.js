@@ -13,7 +13,7 @@ exports.register_user = (req, res) => {
 	// On vérifie si notre bdd mysql fonctionne
 	pool.getConnection((err, connection) => {
 		if (err) {
-			connection.connection();
+			connection.release();
 			return onDatabaseConError(res);
 		}
 

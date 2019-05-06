@@ -5,13 +5,19 @@ exports.getPool = () => {
   if (pool)
     return pool;
 
+  let dbHost = process.env.DB_URL;
+  let dbUser = process.env.DB_USER;
+  let dbPwd = process.env.DB_PWD;
+  let dbDB = process.env.DB_DB;
+
   pool = mysql.createPool({
-    host: 'r6ze0q02l4me77k3.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
-    user: 'crxdngx2s38j66t7',
-    password: 'ciu21nrzhhtkjtfr+',
-    database: 'omdo9pxou6s2ysd5',
+    host: process.env.DB_URL,
+    user: process.env.DB_USER,
+    password: process.env.DB_PWD,
+    database: process.env.DB_DB,
     charset: 'utf8mb4'
   });
+  console.log(dbHost, dbUser, dbPwd, dbDB);
 
   return pool;
 }
