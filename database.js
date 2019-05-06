@@ -6,7 +6,7 @@ exports.getPool = () => {
     return pool;
 
   pool = mysql.createPool({
-    host: '127.0.0.1',
+    host: 'r6ze0q02l4me77k3.chr7pe7iynqr.eu-west-1.rds.amazonaws.com',
     user: 'crxdngx2s38j66t7',
     password: 'ciu21nrzhhtkjtfr+',
     database: 'omdo9pxou6s2ysd5',
