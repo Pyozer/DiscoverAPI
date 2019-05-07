@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 exports.like = (req,res) => {
 
 	let id_user = req.user;
