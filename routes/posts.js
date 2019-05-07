@@ -48,28 +48,14 @@ exports.get_posts_location = (req, res) => {
 
 exports.get_posts_map = (req, res) => {
 	let requestPosts =
-		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike, ( " +
-		"   6371 * " +
-		"   acos(cos(radians(?)) * " +
-		"   cos(radians(latitude_post)) * " +
-		"   cos(radians(longitude_post) - " +
-		"   radians(?)) + " +
-		"   sin(radians(?)) * " +
-		"   sin(radians(latitude_post)))" +
-		") AS distance " +
+		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +
 		" FROM post INNER JOIN user ON user.id_user=post.id_user" +
 		" LEFT JOIN post_like ON post_like.id_post=post.id_post" +
 		" LEFT JOIN post_comment ON post_comment.id_post=post.id_post" +
 		" LEFT JOIN post_like as checkUserLike ON checkUserLike.id_post=post.id_post AND checkUserLike.id_user = ?" +
 		" GROUP BY post.id_post, post.id_user";
 
-	get_posts(
-		requestPosts, [
-			req.query.latitude_user,
-			req.query.longitude_user,
-			req.query.latitude_user,
-			req.user
-		], req, res);
+	get_posts(requestPosts, [req.user], req, res);
 }
 
 function get_posts(request, params, req, res) {
@@ -167,33 +153,27 @@ exports.get_specific_post = (req, res) => {
 				}
 
 				let tags = [];
-
 				resultTags.forEach((tag) => {
-					tags.push({
-						id_tag: tag.id_tag,
-						nom_tag: tag.nom_tag
-					})
+					tags.push({ id_tag: tag.id_tag, nom_tag: tag.nom_tag })
 				});
-				let distance;
-				if (resultPost[0].distance)
-					distance = resultPost[0].distance * 1000
-
+				
+				let post = resultPost[0];
 				let result = [{
-					id_post: resultPost[0].id_post,
-					content_post: resultPost[0].content_post,
-					photo_post: resultPost[0].photo_post,
-					date_post: resultPost[0].date_post,
-					latitude_post: resultPost[0].latitude_post,
-					longitude_post: resultPost[0].longitude_post,
-					distance: distance,
-					likes_post: resultPost[0].likes_post,
-					comments_post: resultPost[0].comments_post,
-					isUserLike: resultPost[0].isUserLike,
+					id_post: post.id_post,
+					content_post: post.content_post,
+					photo_post: post.photo_post,
+					date_post: post.date_post,
+					latitude_post: post.latitude_post,
+					longitude_post: post.longitude_post,
+					distance: post.distance ? post.distance * 1000 : null,
+					likes_post: post.likes_post,
+					comments_post: post.comments_post,
+					isUserLike: post.isUserLike,
 					author_post: {
-						id_user: resultPost[0].id_user,
-						first_name_user: resultPost[0].first_name_user,
-						last_name_user: resultPost[0].last_name_user,
-						photo_user: resultPost[0].photo_user
+						id_user: post.id_user,
+						first_name_user: post.first_name_user,
+						last_name_user: post.last_name_user,
+						photo_user: post.photo_user
 					},
 					tags_post: tags
 				}];
