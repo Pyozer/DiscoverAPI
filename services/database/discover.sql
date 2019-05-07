@@ -17,7 +17,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 DROP TABLE IF EXISTS 'reset_password'
-
+DROP TABLE IF EXISTS 'friend'
 
 --
 -- Database: `discover`
@@ -25,36 +25,36 @@ DROP TABLE IF EXISTS 'reset_password'
 
 -- --------------------------------------------------------
 
+-- --
+-- -- Table structure for table `friend`
+-- --
 --
--- Table structure for table `friend`
---
-
-CREATE TABLE `friend` (
-  `id_friend` int(11) NOT NULL,
-  `id_user_origin` int(11) NOT NULL,
-  `id_user_dest` int(11) NOT NULL,
-  `date_friend` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+-- CREATE TABLE `friend` (
+--   `id_friend` int(11) NOT NULL,
+--   `id_user_origin` int(11) NOT NULL,
+--   `id_user_dest` int(11) NOT NULL,
+--   `date_friend` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `friend`
 --
 
-INSERT INTO `friend` (`id_friend`, `id_user_origin`, `id_user_dest`, `date_friend`) VALUES
-(13, 3, 1, '2017-11-17 09:49:34'),
-(21, 2, 2, '2017-11-21 14:43:10'),
-(22, 4, 3, '2017-12-05 13:04:14'),
-(33, 2, 1, '2017-12-28 18:02:32'),
-(60, 1, 3, '2017-12-31 03:01:12'),
-(62, 1, 11, '2018-01-03 03:07:03'),
-(63, 15, 1, '2018-01-09 00:33:12'),
-(64, 15, 2, '2018-01-09 00:33:16'),
-(65, 15, 3, '2018-01-09 00:33:21'),
-(67, 15, 4, '2018-01-09 00:33:26'),
-(68, 15, 11, '2018-01-09 00:33:28'),
-(69, 15, 12, '2018-01-09 00:33:30'),
-(70, 15, 13, '2018-01-09 00:33:32'),
-(71, 18, 1, '2018-01-09 08:29:16');
+-- INSERT INTO `friend` (`id_friend`, `id_user_origin`, `id_user_dest`, `date_friend`) VALUES
+-- (13, 3, 1, '2017-11-17 09:49:34'),
+-- (21, 2, 2, '2017-11-21 14:43:10'),
+-- (22, 4, 3, '2017-12-05 13:04:14'),
+-- (33, 2, 1, '2017-12-28 18:02:32'),
+-- (60, 1, 3, '2017-12-31 03:01:12'),
+-- (62, 1, 11, '2018-01-03 03:07:03'),
+-- (63, 15, 1, '2018-01-09 00:33:12'),
+-- (64, 15, 2, '2018-01-09 00:33:16'),
+-- (65, 15, 3, '2018-01-09 00:33:21'),
+-- (67, 15, 4, '2018-01-09 00:33:26'),
+-- (68, 15, 11, '2018-01-09 00:33:28'),
+-- (69, 15, 12, '2018-01-09 00:33:30'),
+-- (70, 15, 13, '2018-01-09 00:33:32'),
+-- (71, 18, 1, '2018-01-09 08:29:16');
 
 -- --------------------------------------------------------
 
@@ -279,13 +279,13 @@ INSERT INTO `user` (`id_user`, `email_user`, `password_user`, `first_name_user`,
 -- Indexes for dumped tables
 --
 
---
--- Indexes for table `friend`
---
-ALTER TABLE `friend`
-  ADD PRIMARY KEY (`id_friend`),
-  ADD KEY `id_1_friend` (`id_user_origin`),
-  ADD KEY `id_2_friend` (`id_user_dest`);
+-- --
+-- -- Indexes for table `friend`
+-- --
+-- ALTER TABLE `friend`
+--   ADD PRIMARY KEY (`id_friend`),
+--   ADD KEY `id_1_friend` (`id_user_origin`),
+--   ADD KEY `id_2_friend` (`id_user_dest`);
 
 --
 -- Indexes for table `post`
@@ -343,11 +343,11 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT for dumped tables
 --
 
---
--- AUTO_INCREMENT for table `friend`
---
-ALTER TABLE `friend`
-  MODIFY `id_friend` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+-- --
+-- -- AUTO_INCREMENT for table `friend`
+-- --
+-- ALTER TABLE `friend`
+--   MODIFY `id_friend` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 --
 -- AUTO_INCREMENT for table `post`
 --
@@ -387,12 +387,12 @@ ALTER TABLE `user`
 -- Constraints for dumped tables
 --
 
---
--- Constraints for table `friend`
---
-ALTER TABLE `friend`
-  ADD CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`id_user_origin`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`id_user_dest`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- --
+-- -- Constraints for table `friend`
+-- --
+-- ALTER TABLE `friend`
+--   ADD CONSTRAINT `friend_ibfk_1` FOREIGN KEY (`id_user_origin`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE,
+--   ADD CONSTRAINT `friend_ibfk_2` FOREIGN KEY (`id_user_dest`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `post`
