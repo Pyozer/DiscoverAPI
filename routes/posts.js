@@ -168,7 +168,7 @@ exports.get_specific_post = (req, res) => {
 					distance: post.distance >= 0 ? post.distance * 1000 : null,
 					likes_post: post.likes_post,
 					comments_post: post.comments_post,
-					isUserLike: post.isUserLike > 1,
+					isUserLike: post.isUserLike > 0,
 					author_post: {
 						id_user: post.id_user,
 						first_name_user: post.first_name_user,
