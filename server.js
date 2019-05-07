@@ -19,8 +19,8 @@ app.use(morgan('dev'));
 // Functions utils
 server_email = 'discover.pts3g9@gmail.com';
 
-const db = require('./database.js');
-email = require('./email.js');
+const db = require('./services/database/database.js');
+email = require('./services/email.js');
 
 // Connexion à la BDD
 pool = db.getPool(); // get database instance
