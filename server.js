@@ -4,6 +4,7 @@ const app = require('./app.js');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 jsend = require('jsend');
+require('dotenv').config();
 
 // =======================
 // Configuration =========
