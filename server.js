@@ -32,7 +32,6 @@ posts = require('./routes/posts');
 likes = require('./routes/likes');
 comments = require('./routes/comments');
 tags = require('./routes/tags');
-images = require('./routes/images');
 profiles = require('./routes/profiles');
 
 // Langue de la requete
@@ -154,19 +153,8 @@ router.route('/posts/:id_post/comments/:id_comment').delete(users.loginRequired,
 //Get all tags
 router.route('/tags').get(tags.get_tags);
 
-// Get image post
-router.route('/images/posts/:image').get(images.get_post_original);
-// Get image post thumbnail
-router.route('/images/posts/:image/thumbnails').get(images.get_post_thumbnail);
-
-// Get image profil
-router.route('/images/profils/:image').get(images.get_profil_original);
-// Get image profil thumbnail
-router.route('/images/profils/:image/thumbnails').get(images.get_profil_thumbnail);
-
 // === REGISTER OUR ROUTES ===
 app.use('/api', router);
-
 
 // === START THE SERVER ===
 app.listen(port, (error) => {

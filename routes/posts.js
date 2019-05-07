@@ -1,8 +1,6 @@
 const database = require('../services/database/database.js');
 let pool = database.instance.getPool();
 
-const multiparty = require('multiparty');
-
 function getSortMode(querySort) {
 	let sortMode = "date_post";
 	if (querySort) {
@@ -16,7 +14,6 @@ function getSortMode(querySort) {
 }
 
 exports.get_posts_location = (req, res) => {
-
 	if (!req.query.tags || req.query.tags == "") {
 		req.query.tags = "id_tag";
 	}
@@ -70,7 +67,6 @@ exports.get_posts_map = (req, res) => {
 }
 
 function get_posts(request, params, req, res) {
-
 	pool.getConnection((err, connection) => {
 		if (err) {
 			connection.release();
@@ -185,7 +181,6 @@ exports.get_specific_post = (req, res) => {
 	});
 }
 exports.save_post = (req, res) => {
-
 	let id_user = req.user;
 
 	pool.getConnection((err, connection) => {
@@ -194,48 +189,40 @@ exports.save_post = (req, res) => {
 			return onDatabaseConError(res);
 		}
 
-		images.upload_image(req, res, "posts", (error, filename) => {
+		let tagsArray = JSON.parse(req.body.tags_post);
+
+		let post = {
+			id_user: id_user,
+			content_post: req.body.content_post,
+			photo_post: req.body.image_url,
+			latitude_post: req.body.latitude_post,
+			longitude_post: req.body.longitude_post,
+			date_post: new Date()
+		}
+
+		connection.query("INSERT INTO post SET ?", [post], (error, results, fields) => {
 			if (error) {
 				connection.release();
-				return onDatabaseReqError(res, getString("error_image_upload"));
+				return onDatabaseReqError(res, getString("error_posts_save"));
 			}
+			console.log('Post saved.');
 
-			let tagsArray = JSON.parse(req.body.tags_post);
+			let dataTags = [];
+			tagsArray.forEach((element) => {
+				dataTags.push([
+					results.insertId,
+					element.id_tag
+				]);
+			});
 
-			let post = {
-				id_user: id_user,
-				content_post: req.body.content_post,
-				photo_post: filename,
-				latitude_post: req.body.latitude_post,
-				longitude_post: req.body.longitude_post,
-				date_post: new Date()
-			}
-
-			connection.query("INSERT INTO post SET ?", [post], (error, results, fields) => {
+			connection.query("INSERT INTO tag_post(id_post, id_tag) VALUES ?", [dataTags], (error, results, fields) => {
+				connection.release();
 				if (error) {
-					connection.release();
-					return onDatabaseReqError(res, getString("error_posts_save"));
+					return onDatabaseReqError(res, getString("error_posts_tags_save"));
 				}
+				console.log("Tag inserted !");
 
-				console.log('Post saved.');
-
-				let dataTags = [];
-				tagsArray.forEach((element) => {
-					dataTags.push([
-						results.insertId,
-						element.id_tag
-					]);
-				});
-
-				connection.query("INSERT INTO tag_post(id_post, id_tag) VALUES ?", [dataTags], (error, results, fields) => {
-					connection.release();
-					if (error) {
-						return onDatabaseReqError(res, getString("error_posts_tags_save"));
-					}
-					console.log("Tag inserted !");
-
-					return res.status(200).send(jsend.success(true));
-				});
+				return res.status(200).send(jsend.success(true));
 			});
 		});
 	});
@@ -272,7 +259,6 @@ exports.delete_post = (req, res) => {
 					console.log("Images deleted !");
 					return res.status(200).send(jsend.success(true));
 				});
-
 			});
 		});
 	});

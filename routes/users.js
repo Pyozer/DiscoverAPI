@@ -5,7 +5,6 @@ const bcrypt = require('bcryptjs');
 const uuidv1 = require('uuid/v1');
 
 exports.register_user = (req, res) => {
-
 	let newUser = {
 		email_user: req.body.email_user,
 		password_user: req.body.password_user,
@@ -56,7 +55,6 @@ exports.register_user = (req, res) => {
 }
 
 exports.login_user = (req, res) => {
-
 	let email_user = req.body.email_user;
 	let password_user = req.body.password_user;
 
@@ -105,7 +103,6 @@ exports.login_user = (req, res) => {
 }
 
 exports.logout_user = (req, res) => {
-
 	let id_user = req.params.id_user;
 
 	pool.getConnection((err, connection) => {
