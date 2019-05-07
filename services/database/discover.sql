@@ -16,10 +16,6 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
-DROP DATABASE `omdo9pxou6s2ysd5`;
-CREATE DATABASE `omdo9pxou6s2ysd5`;
-
-USE `omdo9pxou6s2ysd5`;
 
 DROP TABLE IF EXISTS `reset_password`;
 DROP TABLE IF EXISTS `friend`;
