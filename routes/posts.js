@@ -63,7 +63,13 @@ exports.get_posts_map = (req, res) => {
 		" LEFT JOIN post_like as checkUserLike ON checkUserLike.id_post=post.id_post AND checkUserLike.id_user = ?" +
 		" GROUP BY post.id_post, post.id_user";
 
-	get_posts(requestPosts, [req.user], req, res);
+	get_posts(
+		requestPosts, [
+			req.query.latitude_user,
+			req.query.longitude_user,
+			req.query.latitude_user,
+			req.user
+		], req, res);
 }
 
 function get_posts(request, params, req, res) {
@@ -92,7 +98,7 @@ function get_posts(request, params, req, res) {
 					likes_post: row.likes_post,
 					comments_post: row.comments_post,
 					isUserLike: row.isUserLike,
-					distance: row.distance,
+					distance: row.distance ? row.distance * 1000 : null,
 					author_post: {
 						id_user: row.id_user,
 						first_name_user: row.first_name_user,
@@ -130,8 +136,16 @@ exports.get_specific_post = (req, res) => {
 			" LEFT JOIN post_like as checkUserLike ON checkUserLike.id_post=post.id_post AND checkUserLike.id_user = ?" +
 			" WHERE post.id_post = ?";
 
-		connection.query(requestPost, [req.user, req.params.id_post], (error, resultPost, fields) => {
-			if (error) {
+		let queryData = [
+			req.query.latitude_user,
+			req.query.longitude_user,
+			req.query.latitude_user,
+			req.user,
+			req.params.id_post
+		];
+
+		connection.query(requestPost, queryData, (errorPost, resultPost, fields) => {
+			if (errorPost) {
 				connection.release();
 				return onDatabaseReqError(res, getString("error_posts_get"));
 			}
@@ -146,9 +160,9 @@ exports.get_specific_post = (req, res) => {
 				" LEFT JOIN post ON post.id_post=tag_post.id_post" +
 				" WHERE post.id_post = ?";
 
-			connection.query(requestTagsPost, [req.params.id_post], (error, resultTags, fields) => {
+			connection.query(requestTagsPost, [req.params.id_post], (errorTags, resultTags, fields) => {
 				connection.release();
-				if (error) {
+				if (errorTags) {
 					return onDatabaseReqError(res, getString("error_posts_get"));
 				}
 
@@ -160,6 +174,9 @@ exports.get_specific_post = (req, res) => {
 						nom_tag: tag.nom_tag
 					})
 				});
+				let distance;
+				if (resultPost[0].distance)
+					distance = resultPost[0].distance * 1000
 
 				let result = [{
 					id_post: resultPost[0].id_post,
@@ -168,6 +185,7 @@ exports.get_specific_post = (req, res) => {
 					date_post: resultPost[0].date_post,
 					latitude_post: resultPost[0].latitude_post,
 					longitude_post: resultPost[0].longitude_post,
+					distance: distance,
 					likes_post: resultPost[0].likes_post,
 					comments_post: resultPost[0].comments_post,
 					isUserLike: resultPost[0].isUserLike,
@@ -214,16 +232,13 @@ exports.save_post = (req, res) => {
 
 			let dataTags = [];
 			tagsArray.forEach((element) => {
-				dataTags.push([
-					results.insertId,
-					element
-				]);
+				dataTags.push([results.insertId, element]);
 			});
 
 			connection.query("INSERT INTO tag_post(id_post, id_tag) VALUES ?", [dataTags], (errTags, results, fields) => {
 				connection.release();
 				if (errTags) {
-					return onDatabaseReqError(res, errTags);
+					return onDatabaseReqError(res, getString("error_posts_tags_save"));
 				}
 				console.log("Tag inserted !");
 
