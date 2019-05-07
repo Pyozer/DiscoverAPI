@@ -84,7 +84,7 @@ function get_posts(request, params, req, res) {
 					likes_post: row.likes_post,
 					comments_post: row.comments_post,
 					isUserLike: row.isUserLike > 0,
-					distance: row.distance ? row.distance * 1000 : null,
+					distance: row.distance >= 0 ? row.distance * 1000 : null,
 					author_post: {
 						id_user: row.id_user,
 						first_name_user: row.first_name_user,
@@ -165,7 +165,7 @@ exports.get_specific_post = (req, res) => {
 					date_post: post.date_post,
 					latitude_post: post.latitude_post,
 					longitude_post: post.longitude_post,
-					distance: post.distance ? post.distance * 1000 : null,
+					distance: post.distance >= 0 ? post.distance * 1000 : null,
 					likes_post: post.likes_post,
 					comments_post: post.comments_post,
 					isUserLike: post.isUserLike > 1,
