@@ -49,9 +49,9 @@ getString = (stringKey, args = null) => {
     let langStrings;
     // Get Strings array for the languages of the request
     if (requestLanguage == "fr")
-        langStrings = require("./lang_fr");
+        langStrings = require("./config/lang_fr");
     else
-        langStrings = require("./lang_en");
+        langStrings = require("./config/lang_en");
 
     // Get the string ask
     let stringToReturn = langStrings[stringKey];
