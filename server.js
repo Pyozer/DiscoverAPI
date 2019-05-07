@@ -162,6 +162,7 @@ app.listen(port, (error) => {
 });
 
 const sgMail = require('@sendgrid/mail');
+console.log(process.env.SENDGRID_API_KEY , '-----------------');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 const msg = {
   to: 'adam.louis28@gmail.com',
