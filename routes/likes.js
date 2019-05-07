@@ -26,7 +26,7 @@ exports.like = (req, res) => {
 						if (error) {
 							return onDatabaseReqError(res, getString("error_likes_save"));
 						}
-						return res.status(200).send(jsend.success(true));
+						return res.status(200).send(jsend.success({is_like: true}));
 					});
 				} else { //Si le post est deja liké, alors l'enlever
 					connection.query("DELETE FROM post_like WHERE id_like = ?", results[0].id_like, (err, result) => {
@@ -34,7 +34,7 @@ exports.like = (req, res) => {
 						if (error) {
 							return onDatabaseReqError(res, getString("error_likes_remove"));
 						}
-						return res.status(200).send(jsend.success(false));
+						return res.status(200).send(jsend.success({is_like: false}));
 					});
 				}
 			}
