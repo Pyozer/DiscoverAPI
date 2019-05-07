@@ -9,14 +9,14 @@ class Database {
     this.pool = createPool(config)
   }
 
-  getPool() { return this.pool; }
+  getPool() { return this.pool }
 }
 global[DATABASE_KEY] = new Database()
 
 var singleton = {}
 Object.defineProperty(singleton, "instance", {
-  get: function () {
-    return global[DATABASE_KEY];
+  get: function(){
+    return global[DATABASE_KEY]
   },
   enumerable: true
 })
