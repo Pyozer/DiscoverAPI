@@ -13,11 +13,6 @@ module.exports = {
 	error_account_checking: "Erreur serveur vérification de votre compte",
 	error_account_save: "Erreur serveur sauvegarde de votre compte",
 	error_account_match: "Erreur l'e-mail et le mot de passe ne correspondent pas",
-	error_account_update: "Erreur serveur mise à jour de votre compte",
-	error_account_update_position: "Erreur serveur mise à jour de votre position",
-	error_account_update_email: "Erreur serveur mise à jour de votre adresse mail",
-	error_account_update_pwd: "Erreur serveur mise à jour de votre mot de passe",
-	error_account_update_img: "Erreur serveur mise à jour de votre image de profil",
 	error_account_old_pwd: "Erreur votre mot de passe est incorrecte",
 	error_account_already_exist: "Erreur un compte existe déjà avec cet e-mail",
 	error_no_account: "Erreur pas de compte avec cet e-mail",
@@ -47,9 +42,5 @@ module.exports = {
 	error_image_upload: "Erreur téléchargement de l'image au serveur",
 	error_image_delete: "Erreur suppression de l'image sur le serveur",
 
-	error_search_account: "Erreur durant la recherche d'un utilisateur",
-	
-	success_account_update_email: "Votre adresse e-mail a bien été mis à jour",
-	success_account_update_pwd: "Votre mot de passe a bien été mis à jour",
-	success_account_update_img: "Votre image de profil a bien été mis à jour"
+	error_search_account: "Erreur durant la recherche d'un utilisateur"
 }

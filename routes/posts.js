@@ -58,18 +58,6 @@ exports.get_posts_map = (req, res) => {
 	get_posts(requestPosts, [req.user], req, res);
 }
 
-exports.get_posts_user = (req, res) => {
-	let requestPosts =
-		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +
-		" FROM post INNER JOIN user ON user.id_user=post.id_user AND user.id_user = ?" +
-		" LEFT JOIN post_like ON post_like.id_post=post.id_post" +
-		" LEFT JOIN post_comment ON post_comment.id_post=post.id_post" +
-		" LEFT JOIN post_like as checkUserLike ON checkUserLike.id_post=post.id_post AND checkUserLike.id_user = ?" +
-		" GROUP BY post.id_post, post.id_user ORDER BY date_post DESC";
-
-	get_posts(requestPosts, [req.params.id_user, req.user], req, res);
-}
-
 function get_posts(request, params, req, res) {
 
 	pool.getConnection((err, connection) => {

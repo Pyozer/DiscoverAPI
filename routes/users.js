@@ -45,9 +45,7 @@ exports.register_user = (req, res) => {
 					first_name_user: newUser.first_name_user,
 					last_name_user: newUser.last_name_user,
 					email_user: newUser.email_user,
-					photo_user: newUser.photo_user,
-					pos_lat_user: newUser.pos_lat_user,
-					pos_long_user: newUser.pos_long_user
+					photo_user: newUser.photo_user
 				}));
 			});
 		});
@@ -96,9 +94,7 @@ exports.login_user = (req, res) => {
 					first_name_user: resultUser[0].first_name_user,
 					last_name_user: resultUser[0].last_name_user,
 					email_user: resultUser[0].email_user,
-					photo_user: resultUser[0].photo_user,
-					pos_lat_user: resultUser[0].pos_lat_user,
-					pos_long_user: resultUser[0].pos_long_user
+					photo_user: resultUser[0].photo_user
 				}));
 			});
 		});
@@ -131,34 +127,4 @@ exports.loginRequired = (req, res, next) => {
 		next();
 	else
 		return res.status(401).send(jsend.error(getString("error_users_unauthorized")));
-}
-
-exports.search_user = (req, res) => {
-
-	let search = "";
-	if (req.params.search_user) {
-		search = req.params.search_user;
-	}
-
-	// On vérifie si notre bdd mysql fonctionne
-	pool.getConnection((err, connection) => {
-		if (err) {
-			if (connection)
-				connection.release();
-			console.log(err);
-
-			return onDatabaseConError(res);
-		}
-
-		connection.query('SELECT id_user, first_name_user, last_name_user, photo_user FROM user WHERE UPPER(first_name_user) LIKE UPPER(?) OR UPPER(last_name_user) LIKE UPPER(?)', ['%' + search + '%', '%' + search + '%'], (error, results, fields) => {
-			connection.release();
-			if (error) {
-				return onDatabaseReqError(res, getString("error_search_account"));
-			}
-
-			res.status(200).send(jsend.success({
-				users: results
-			}));
-		});
-	});
 }

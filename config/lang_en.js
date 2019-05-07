@@ -13,11 +13,6 @@ module.exports = {
 	error_account_checking: "Error server checking your account",
 	error_account_save: "Error server saving your account",
 	error_account_match: "Error e-mail and password don't match",
-	error_account_update: "Error server updating your account",
-	error_account_update_position: "Error server updating your position",
-	error_account_update_email: "Error server updating your e-mail address",
-	error_account_update_pwd: "Error server updating your password",
-	error_account_update_img: "Error server updating your picture",
 	error_account_old_pwd: "Error your current password is wrong",
 	error_account_already_exist: "Error an account with this e-mail already exists",
 	error_no_account: "Error no account with this e-mail",
@@ -48,9 +43,5 @@ module.exports = {
 	error_image_upload: "Error uploading the image to the server",
 	error_image_delete: "Error deleting the image from the server",
 
-	error_search_account: "Error during search user",
-
-	success_account_update_email: "Your e-mail address has been sucessfully updated",
-	success_account_update_pwd: "Your password has been sucessfully updated",
-	success_account_update_img: "Your picture has been sucessfully updated"
+	error_search_account: "Error during search user"
 }

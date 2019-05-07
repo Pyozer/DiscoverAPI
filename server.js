@@ -33,7 +33,6 @@ comments = require('./routes/comments');
 tags = require('./routes/tags');
 images = require('./routes/images');
 profiles = require('./routes/profiles');
-update = require('./routes/update');
 
 // Langue de la requete
 requestLanguage = "en";
@@ -128,20 +127,6 @@ router.route('/users/:id_user/logout').put(users.loginRequired, users.logout_use
 // Get user profil info
 router.route('/users/:id_user/info').get(users.loginRequired, profiles.get_profile_info);
 
-// Update email user profil
-router.route('/users/:id_user/edit/email').put(users.loginRequired, profiles.edit_profile_email);
-// Update password user profil
-router.route('/users/:id_user/edit/password').put(users.loginRequired, profiles.edit_profile_password);
-// Update img user profil
-router.route('/users/:id_user/edit/image').put(users.loginRequired, profiles.edit_profile_img);
-// Update position user profil
-router.route('/users/:id_user/edit/position').put(users.loginRequired, profiles.edit_profile_position);
-
-// Search user
-router.route('/users/search').get(users.search_user);
-// Search user
-router.route('/users/search/:search_user').get(users.search_user);
-
 // Save new post
 router.route('/posts').post(users.loginRequired, posts.save_post);
 // Remove post
@@ -151,8 +136,6 @@ router.route('/posts/:id_post').delete(users.loginRequired, posts.delete_post);
 router.route('/posts/location').get(users.loginRequired, posts.get_posts_location);
 // Get all posts for map
 router.route('/posts/map').get(users.loginRequired, posts.get_posts_map);
-// Get all posts of user
-router.route('/posts/user/:id_user').get(users.loginRequired, posts.get_posts_user);
 
 // Get specific post
 router.route('/posts/:id_post').get(users.loginRequired, posts.get_specific_post);
@@ -179,9 +162,6 @@ router.route('/images/posts/:image/thumbnails').get(images.get_post_thumbnail);
 router.route('/images/profils/:image').get(images.get_profil_original);
 // Get image profil thumbnail
 router.route('/images/profils/:image/thumbnails').get(images.get_profil_thumbnail);
-
-//Get last app version
-router.route('/version').get(update.get_last_version);
 
 // === REGISTER OUR ROUTES ===
 app.use('/api', router);
