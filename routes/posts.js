@@ -14,7 +14,7 @@ function getSortMode(querySort) {
 
 exports.get_posts_location = (req, res) => {
 
-	if (req.query.tags == "-1") {
+	if (!req.query.tags || req.query.tags == "") {
 		req.query.tags = "id_tag";
 	}
 
@@ -48,7 +48,15 @@ exports.get_posts_location = (req, res) => {
 
 exports.get_posts_map = (req, res) => {
 	let requestPosts =
-		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +
+		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike, ( " +
+		"   6371 * " +
+		"   acos(cos(radians(?)) * " +
+		"   cos(radians(latitude_post)) * " +
+		"   cos(radians(longitude_post) - " +
+		"   radians(?)) + " +
+		"   sin(radians(?)) * " +
+		"   sin(radians(latitude_post)))" +
+		") AS distance " +
 		" FROM post INNER JOIN user ON user.id_user=post.id_user" +
 		" LEFT JOIN post_like ON post_like.id_post=post.id_post" +
 		" LEFT JOIN post_comment ON post_comment.id_post=post.id_post" +
@@ -85,6 +93,7 @@ function get_posts(request, params, req, res) {
 					likes_post: row.likes_post,
 					comments_post: row.comments_post,
 					isUserLike: row.isUserLike,
+					distance: row.distance,
 					author_post: {
 						id_user: row.id_user,
 						first_name_user: row.first_name_user,
