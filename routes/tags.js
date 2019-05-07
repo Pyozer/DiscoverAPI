@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 exports.get_tags = (req, res) => {
 	pool.getConnection((err, connection) => {
 		if (err) {

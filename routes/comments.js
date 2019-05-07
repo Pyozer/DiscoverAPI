@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 exports.get_posts_comments = (req, res) => {
 
 	let id_post = req.params.id_post;

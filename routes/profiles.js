@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 const bcrypt      = require('bcryptjs');
 const multiparty  = require('multiparty');
 const fs          = require('fs');
@@ -13,10 +16,10 @@ exports.get_profile_info = (req, res)  => {
     		return onDatabaseConError(res);
     	}
 
-    	let query = "SELECT " + 
+    	let query = "SELECT " +
     					"(SELECT COUNT(id_post) FROM post WHERE post.id_user = ?) as posts, " +
     					"id_user, " +
-                        "email_user," + 
+                        "email_user," +
     					"first_name_user, " +
     					"last_name_user, " +
     					"photo_user " +

@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 const multer = require('multer');
 const fs = require('fs');
 const sharp = require('sharp');

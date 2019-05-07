@@ -4,6 +4,7 @@ const app = require('./app.js');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 jsend = require('jsend');
+require('dotenv').config();
 
 // =======================
 // Configuration =========
@@ -19,11 +20,11 @@ app.use(morgan('dev'));
 // Functions utils
 server_email = 'discover.pts3g9@gmail.com';
 
-const db = require('./services/database/database.js');
+const database = require('./services/database/database.js');
 email = require('./services/email.js');
 
 // Connexion à la BDD
-pool = db.getPool(); // get database instance
+pool = database.instance.getPool(); // get database instance
 
 // Routes files
 users = require('./routes/users');

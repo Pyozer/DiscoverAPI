@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 const multiparty = require('multiparty');
 
 function getSortMode(querySort) {

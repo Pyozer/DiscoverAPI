@@ -1,3 +1,6 @@
+const database = require('../services/database/database.js');
+let pool = database.instance.getPool();
+
 const bcrypt = require('bcryptjs');
 const uuidv1 = require('uuid/v1');
 
