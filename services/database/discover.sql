@@ -16,6 +16,9 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
 /*!40101 SET NAMES utf8mb4 */;
 
+DROP TABLE IF EXISTS 'reset_password'
+
+
 --
 -- Database: `discover`
 --
@@ -138,35 +141,35 @@ INSERT INTO `post_like` (`id_like`, `id_post`, `id_user`, `date_like`) VALUES
 
 -- --------------------------------------------------------
 
+-- --
+-- -- Table structure for table `reset_password`
+-- --
 --
--- Table structure for table `reset_password`
+-- CREATE TABLE `reset_password` (
+--   `id_reset` int(11) NOT NULL,
+--   `id_user` int(11) NOT NULL,
+--   `token_reset` varchar(255) NOT NULL,
+--   `date_reset` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+-- ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 --
-
-CREATE TABLE `reset_password` (
-  `id_reset` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  `token_reset` varchar(255) NOT NULL,
-  `date_reset` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
+-- --
+-- -- Dumping data for table `reset_password`
+-- --
 --
--- Dumping data for table `reset_password`
---
-
-INSERT INTO `reset_password` (`id_reset`, `id_user`, `token_reset`, `date_reset`) VALUES
-(1, 2, '565e41', '2018-01-03 18:37:07'),
-(2, 1, '0aba6c', '2018-01-04 03:03:14'),
-(3, 1, '0e3aba', '2018-01-04 03:03:20'),
-(4, 1, '6fa451', '2018-01-04 03:06:03'),
-(5, 1, 'c6dccf', '2018-01-04 03:08:30'),
-(6, 1, '5d325f', '2018-01-04 03:12:42'),
-(7, 1, '021add', '2018-01-04 03:17:19'),
-(8, 1, '391b86', '2018-01-04 03:18:51'),
-(9, 1, '621925', '2018-01-04 03:20:00'),
-(12, 16, '401170', '2018-01-09 01:32:54'),
-(13, 16, '40945c', '2018-01-09 01:32:55'),
-(14, 11, 'a7548c', '2018-01-10 17:48:07'),
-(16, 11, 'a78d53', '2018-01-11 11:56:11');
+-- INSERT INTO `reset_password` (`id_reset`, `id_user`, `token_reset`, `date_reset`) VALUES
+-- (1, 2, '565e41', '2018-01-03 18:37:07'),
+-- (2, 1, '0aba6c', '2018-01-04 03:03:14'),
+-- (3, 1, '0e3aba', '2018-01-04 03:03:20'),
+-- (4, 1, '6fa451', '2018-01-04 03:06:03'),
+-- (5, 1, 'c6dccf', '2018-01-04 03:08:30'),
+-- (6, 1, '5d325f', '2018-01-04 03:12:42'),
+-- (7, 1, '021add', '2018-01-04 03:17:19'),
+-- (8, 1, '391b86', '2018-01-04 03:18:51'),
+-- (9, 1, '621925', '2018-01-04 03:20:00'),
+-- (12, 16, '401170', '2018-01-09 01:32:54'),
+-- (13, 16, '40945c', '2018-01-09 01:32:55'),
+-- (14, 11, 'a7548c', '2018-01-10 17:48:07'),
+-- (16, 11, 'a78d53', '2018-01-11 11:56:11');
 
 -- --------------------------------------------------------
 
@@ -307,12 +310,12 @@ ALTER TABLE `post_like`
   ADD KEY `id_post` (`id_post`),
   ADD KEY `id_user` (`id_user`);
 
---
--- Indexes for table `reset_password`
---
-ALTER TABLE `reset_password`
-  ADD PRIMARY KEY (`id_reset`),
-  ADD KEY `id_user` (`id_user`);
+-- --
+-- -- Indexes for table `reset_password`
+-- --
+-- ALTER TABLE `reset_password`
+--   ADD PRIMARY KEY (`id_reset`),
+--   ADD KEY `id_user` (`id_user`);
 
 --
 -- Indexes for table `tag`
@@ -361,10 +364,10 @@ ALTER TABLE `post_comment`
 ALTER TABLE `post_like`
   MODIFY `id_like` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=69;
 --
--- AUTO_INCREMENT for table `reset_password`
---
-ALTER TABLE `reset_password`
-  MODIFY `id_reset` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+-- -- AUTO_INCREMENT for table `reset_password`
+-- --
+-- ALTER TABLE `reset_password`
+--   MODIFY `id_reset` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 --
 -- AUTO_INCREMENT for table `tag`
 --
@@ -411,11 +414,11 @@ ALTER TABLE `post_like`
   ADD CONSTRAINT `post_like_ibfk_1` FOREIGN KEY (`id_post`) REFERENCES `post` (`id_post`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `post_like_ibfk_2` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
---
--- Constraints for table `reset_password`
---
-ALTER TABLE `reset_password`
-  ADD CONSTRAINT `reset_password_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
+-- --
+-- -- Constraints for table `reset_password`
+-- --
+-- ALTER TABLE `reset_password`
+--   ADD CONSTRAINT `reset_password_ibfk_1` FOREIGN KEY (`id_user`) REFERENCES `user` (`id_user`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `tag_post`
