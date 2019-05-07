@@ -115,7 +115,15 @@ exports.get_specific_post = (req, res) => {
 		}
 
 		let requestPost =
-			"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +
+			"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike, ( " +
+			"   6371 * " +
+			"   acos(cos(radians(?)) * " +
+			"   cos(radians(latitude_post)) * " +
+			"   cos(radians(longitude_post) - " +
+			"   radians(?)) + " +
+			"   sin(radians(?)) * " +
+			"   sin(radians(latitude_post)))" +
+			") AS distance " +
 			" FROM post INNER JOIN user ON user.id_user=post.id_user" +
 			" LEFT JOIN post_like ON post_like.id_post=post.id_post" +
 			" LEFT JOIN post_comment ON post_comment.id_post=post.id_post" +
@@ -125,12 +133,10 @@ exports.get_specific_post = (req, res) => {
 		connection.query(requestPost, [req.user, req.params.id_post], (error, resultPost, fields) => {
 			if (error) {
 				connection.release();
-				console.log("REQUEST ERROR");
 				return onDatabaseReqError(res, getString("error_posts_get"));
 			}
 			if (resultPost.length == 0) {
 				connection.release();
-				console.log("NO POST");
 				return onDatabaseReqError(res, getString("error_result_empty"));
 			}
 
@@ -143,7 +149,6 @@ exports.get_specific_post = (req, res) => {
 			connection.query(requestTagsPost, [req.params.id_post], (error, resultTags, fields) => {
 				connection.release();
 				if (error) {
-					console.log("REQUEST ERROR 2");
 					return onDatabaseReqError(res, getString("error_posts_get"));
 				}
 
@@ -200,10 +205,10 @@ exports.save_post = (req, res) => {
 			date_post: new Date()
 		}
 
-		connection.query("INSERT INTO post SET ?", [post], (error, results, fields) => {
-			if (error) {
+		connection.query("INSERT INTO post SET ?", [post], (errPost, results, fields) => {
+			if (errPost) {
 				connection.release();
-				return onDatabaseReqError(res, getString("error_posts_save"));
+				return onDatabaseReqError(res, getString("error_post_save"));
 			}
 			console.log('Post saved.');
 
@@ -211,14 +216,14 @@ exports.save_post = (req, res) => {
 			tagsArray.forEach((element) => {
 				dataTags.push([
 					results.insertId,
-					element.id_tag
+					element
 				]);
 			});
 
-			connection.query("INSERT INTO tag_post(id_post, id_tag) VALUES ?", [dataTags], (error, results, fields) => {
+			connection.query("INSERT INTO tag_post(id_post, id_tag) VALUES ?", [dataTags], (errTags, results, fields) => {
 				connection.release();
-				if (error) {
-					return onDatabaseReqError(res, getString("error_posts_tags_save"));
+				if (errTags) {
+					return onDatabaseReqError(res, errTags);
 				}
 				console.log("Tag inserted !");
 
@@ -251,14 +256,8 @@ exports.delete_post = (req, res) => {
 				if (error) {
 					return onDatabaseReqError(res, getString("error_posts_delete"));
 				}
-
-				images.delete_image("posts/", results[0].photo_post, res, (error) => {
-					if (error) {
-						return onDatabaseReqError(res, getString("error_image_delete"));
-					}
-					console.log("Images deleted !");
-					return res.status(200).send(jsend.success(true));
-				});
+				// TODO: Remove image on S3
+				return res.status(200).send(jsend.success(true));
 			});
 		});
 	});

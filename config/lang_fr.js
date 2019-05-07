@@ -33,7 +33,7 @@ module.exports = {
 	error_likes_remove: "Erreur suppression de vos mentions j'aime",
 
 	error_posts_get: "Erreur serveur récupération des publications",
-	error_posts_save: "Erreur sauvegarde des publications",
+	error_post_save: "Erreur sauvegarde de la publication",
 	error_posts_tags_saves: "Erreur sauvegarde des filtres",
 	error_posts_delete: "Erreur suppression de votre publication",
 
