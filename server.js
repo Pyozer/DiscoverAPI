@@ -30,12 +30,9 @@ users = require('./routes/users');
 posts = require('./routes/posts');
 likes = require('./routes/likes');
 comments = require('./routes/comments');
-resetpassword = require('./routes/resetpassword');
-friends = require('./routes/friends');
 tags = require('./routes/tags');
 images = require('./routes/images');
 profiles = require('./routes/profiles');
-contact = require('./routes/contact');
 update = require('./routes/update');
 
 // Langue de la requete
@@ -128,11 +125,6 @@ router.route('/users/login').post(users.login_user);
 // Logout a user
 router.route('/users/:id_user/logout').put(users.loginRequired, users.logout_user);
 
-// Check Follow relation
-router.route('/users/:id_user/checkfollow').get(users.loginRequired, friends.check_follow_user);
-// Follow or unfollow user
-router.route('/users/:id_user/follow').post(users.loginRequired, friends.follow_user);
-
 // Get user profil info
 router.route('/users/:id_user/info').get(users.loginRequired, profiles.get_profile_info);
 
@@ -157,8 +149,6 @@ router.route('/posts/:id_post').delete(users.loginRequired, posts.delete_post);
 
 // Get post by location
 router.route('/posts/location').get(users.loginRequired, posts.get_posts_location);
-// Get post of friends
-router.route('/posts/friends').get(users.loginRequired, posts.get_posts_friends);
 // Get all posts for map
 router.route('/posts/map').get(users.loginRequired, posts.get_posts_map);
 // Get all posts of user
@@ -189,14 +179,6 @@ router.route('/images/posts/:image/thumbnails').get(images.get_post_thumbnail);
 router.route('/images/profils/:image').get(images.get_profil_original);
 // Get image profil thumbnail
 router.route('/images/profils/:image/thumbnails').get(images.get_profil_thumbnail);
-
-//Reset password
-router.route('/resetpassword')
-    .post(resetpassword.sendResetToken)
-    .put(resetpassword.changeUserPassword);
-
-//Send contact email
-router.route('/contact').post(users.loginRequired, contact.sendEmailContact);
 
 //Get last app version
 router.route('/version').get(update.get_last_version);

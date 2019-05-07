@@ -33,9 +33,6 @@ module.exports = {
 	error_database_profile_get: "Error server getting profile informations",
 	error_database_email_send: "Error sending email",
 
-	error_friends_unfollow: "Error unfollowing this user",
-	error_friends_follow: "Error following this user",
-
 	error_likes_check: "Error checking your likes",
 	error_likes_save: "Error saving your like",
 	error_likes_remove: "Error removing your like",
@@ -46,11 +43,6 @@ module.exports = {
 	error_posts_tags_saves: "Error saving tags",
 	error_posts_delete: "Error deleting your post",
 
-	error_reset_pwd_create: "Error creating your password reset request",
-	error_reset_token_check: "Error server checking your password reset token",
-	error_reset_token_unknown: "Error unknown reset token",
-	error_reset_token_update: "Error server updating your password",
-
 	error_tag_get: "Error server getting all tags",
 
 	error_image_upload: "Error uploading the image to the server",
@@ -58,9 +50,6 @@ module.exports = {
 
 	error_search_account: "Error during search user",
 
-	mail_reset_pwd: "You asked to reset your discover's password.\n\nReset password key: %s\n\nType it in the application to reset your password.\n\nDiscover team",
-
-	success_reset_pwd: "Your password has been suceessfully reset",
 	success_account_update_email: "Your e-mail address has been sucessfully updated",
 	success_account_update_pwd: "Your password has been sucessfully updated",
 	success_account_update_img: "Your picture has been sucessfully updated"

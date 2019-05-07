@@ -15,8 +15,6 @@ exports.get_profile_info = (req, res)  => {
 
     	let query = "SELECT " + 
     					"(SELECT COUNT(id_post) FROM post WHERE post.id_user = ?) as posts, " +
-    					"(SELECT COUNT(id_user_origin) FROM friend WHERE id_user_origin = ?) as followings, " +
-    					"(SELECT COUNT(id_user_dest) FROM friend WHERE id_user_dest = ?) as followers, " +
     					"id_user, " +
                         "email_user," + 
     					"first_name_user, " +

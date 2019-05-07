@@ -46,24 +46,6 @@ exports.get_posts_location = (req, res) => {
 	], req, res);
 }
 
-exports.get_posts_friends = (req, res) => {
-
-	let sortMode = getSortMode(req.query.sort);
-
-	let requestPosts =
-		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +
-		" FROM post INNER JOIN user ON user.id_user=post.id_user" +
-		" LEFT JOIN post_like ON post_like.id_post=post.id_post" +
-		" LEFT JOIN post_comment ON post_comment.id_post=post.id_post" +
-		" LEFT JOIN post_like as checkUserLike ON checkUserLike.id_post=post.id_post AND checkUserLike.id_user = ?" +
-		" WHERE post.id_user IN( SELECT id_user_dest FROM friend WHERE id_user_origin = ? )" +
-		" GROUP BY post.id_post" +
-		" ORDER BY " + sortMode + " DESC";
-
-	let uid = req.user;
-	get_posts(requestPosts, [uid, uid], req, res);
-}
-
 exports.get_posts_map = (req, res) => {
 	let requestPosts =
 		"SELECT post.*, user.id_user, user.first_name_user, user.last_name_user, user.photo_user, COUNT(DISTINCT post_like.id_like) as likes_post, COUNT(DISTINCT id_comment) as comments_post, COUNT(DISTINCT checkUserLike.id_like) as isUserLike" +

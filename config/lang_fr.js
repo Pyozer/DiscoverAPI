@@ -33,9 +33,6 @@ module.exports = {
 	error_database_profile_get: "Erreur serveur récupération des informations du profil",
 	error_database_email_send: "Erreur envoi email",
 	
-	error_friends_unfollow: "Erreur ne plus suivre cet utilisateur",
-	error_friends_follow: "Erreur suivre cet utilisateur",
-	
 	error_likes_check: "Erreur vérification de vos mentions j'aime",
 	error_likes_save: "Erreur sauvegarde de vos mentions j'aime",
 	error_likes_remove: "Erreur suppression de vos mentions j'aime",
@@ -45,11 +42,6 @@ module.exports = {
 	error_posts_tags_saves: "Erreur sauvegarde des filtres",
 	error_posts_delete: "Erreur suppression de votre publication",
 	
-	error_reset_pwd_create: "Erreur création de votre requête de réinitialisation de mot de passe",
-	error_reset_token_check: "Erreur serveur vérifiaction de votre clé de réinitialisation de mot de passe",
-	error_reset_token_unknown: "Erreur clé de réinitialisation de mot de passe inconnue",
-	error_reset_token_update: "Erreur serveur mise à jour de votre mot de passe",
-	
 	error_tag_get: "Erreur serveur récupération de tous les filtres",
 
 	error_image_upload: "Erreur téléchargement de l'image au serveur",
@@ -57,9 +49,6 @@ module.exports = {
 
 	error_search_account: "Erreur durant la recherche d'un utilisateur",
 	
-	mail_reset_pwd:"Vous avez demandé de réinitialiser votre mot de passe Dicover.\n\nClé de réinitialisation: %s\n\nSaisissez-le dans l'application pour réinitialiser votre mot de passe.\n\nL'équipe Discover",
-	
-	success_reset_pwd: "Votre mot de passe a bien été réinitialisé",
 	success_account_update_email: "Votre adresse e-mail a bien été mis à jour",
 	success_account_update_pwd: "Votre mot de passe a bien été mis à jour",
 	success_account_update_img: "Votre image de profil a bien été mis à jour"
