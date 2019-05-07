@@ -34,7 +34,7 @@ module.exports = {
 
 	error_posts_get: "Error server getting posts",
 	error_posts_retrieve: "Error retrieving posts",
-	error_posts_save: "Error saving posts",
+	error_post_save: "Error saving post",
 	error_posts_tags_saves: "Error saving tags",
 	error_posts_delete: "Error deleting your post",
 
