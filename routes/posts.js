@@ -209,6 +209,7 @@ exports.save_post = (req, res) => {
 				return onDatabaseReqError(res, getString("error_post_save"));
 			}
 			console.log('Post saved.');
+			post.id_post = results.insertId;
 
 			let dataTags = [];
 			tagsArray.forEach((element) => {
@@ -222,7 +223,9 @@ exports.save_post = (req, res) => {
 				}
 				console.log("Tag inserted !");
 
-				return res.status(200).send(jsend.success(true));
+				return res.status(200).send(jsend.success({
+					posts: [post]
+				}));
 			});
 		});
 	});
