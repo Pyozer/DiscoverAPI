@@ -83,7 +83,7 @@ function get_posts(request, params, req, res) {
 					longitude_post: row.longitude_post,
 					likes_post: row.likes_post,
 					comments_post: row.comments_post,
-					isUserLike: row.isUserLike,
+					isUserLike: row.isUserLike > 0,
 					distance: row.distance ? row.distance * 1000 : null,
 					author_post: {
 						id_user: row.id_user,
@@ -156,7 +156,7 @@ exports.get_specific_post = (req, res) => {
 				resultTags.forEach((tag) => {
 					tags.push({ id_tag: tag.id_tag, nom_tag: tag.nom_tag })
 				});
-				
+
 				let post = resultPost[0];
 				let result = [{
 					id_post: post.id_post,
@@ -168,7 +168,7 @@ exports.get_specific_post = (req, res) => {
 					distance: post.distance ? post.distance * 1000 : null,
 					likes_post: post.likes_post,
 					comments_post: post.comments_post,
-					isUserLike: post.isUserLike,
+					isUserLike: post.isUserLike > 1,
 					author_post: {
 						id_user: post.id_user,
 						first_name_user: post.first_name_user,
