@@ -93,7 +93,7 @@ exports.delete_post_comment = (req, res) => {
 				return onDatabaseReqError(res, getString("error_comments_not_found"));
 			}
 
-			return res.status(200).send(jsend.success(true));
+			return res.status(200).send(jsend.success({ result: true }));
 		});
 	});
 }

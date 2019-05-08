@@ -255,7 +255,9 @@ exports.delete_post = (req, res) => {
 					return onDatabaseReqError(res, getString("error_posts_delete"));
 				}
 				// TODO: Remove image on S3
-				return res.status(200).send(jsend.success(true));
+				return res.status(200).send(jsend.success({
+					result: true
+				}));
 			});
 		});
 	});
