@@ -28,7 +28,7 @@ exports.get_posts_comments = (req, res) => {
 
 exports.save_post_comment = (req, res) => {
 	let id_user = req.user;
-	let id_post = req.params.id_post;
+	let id_post = parseInt(req.params.id_post);
 	let text_comment = req.body.text_comment;
 
 	pool.getConnection((err, connection) => {
