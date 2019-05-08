@@ -198,8 +198,8 @@ exports.save_post = (req, res) => {
 			id_user: id_user,
 			content_post: req.body.content_post,
 			photo_post: req.body.image_url,
-			latitude_post: req.body.latitude_post,
-			longitude_post: req.body.longitude_post,
+			latitude_post: parseFloat(req.body.latitude_post),
+			longitude_post: parseFloat(req.body.longitude_post),
 			date_post: new Date()
 		}
 
