@@ -77,6 +77,7 @@ function get_posts(request, params, req, res) {
 				result.push({
 					id_post: row.id_post,
 					content_post: row.content_post,
+					info_post: row.info_post,
 					photo_post: row.photo_post,
 					date_post: row.date_post,
 					latitude_post: row.latitude_post,
@@ -161,6 +162,7 @@ exports.get_specific_post = (req, res) => {
 				let result = [{
 					id_post: post.id_post,
 					content_post: post.content_post,
+					info_post: post.info_post,
 					photo_post: post.photo_post,
 					date_post: post.date_post,
 					latitude_post: post.latitude_post,
@@ -197,6 +199,7 @@ exports.save_post = (req, res) => {
 		let post = {
 			id_user: id_user,
 			content_post: req.body.content_post,
+			info_post: req.body.info_post || "",
 			photo_post: req.body.image_url,
 			latitude_post: parseFloat(req.body.latitude_post),
 			longitude_post: parseFloat(req.body.longitude_post),
