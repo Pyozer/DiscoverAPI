@@ -27,12 +27,16 @@ class Database {
 			try {
 				const connection = await this.getConnection()
 				connection.query(sql, data, (error, results) => {
-					if(error)
+					if(error) {
+						connection.release()
 						return reject(error)
+					}
 
+					connection.release()
 					resolve(results)
 				})
 			} catch(error) {
+				connection.release()
 				return reject(error)
 			}
 		})
