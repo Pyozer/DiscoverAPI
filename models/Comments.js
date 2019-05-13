@@ -54,13 +54,7 @@ class Comments {
 			const sql_saveComment = 'INSERT INTO post_comment SET ?'
 			const resultSaveComment = await database.instance.query(sql_saveComment, [comment])
 
-			let savedComment = comment
-			savedComment.id_comment = resultSaveComment.insertId
-			savedComment.first_name_user = userPosting[0].first_name_user
-			savedComment.last_name_user = userPosting[0].last_name_user
-			savedComment.photo_user = userPosting[0].photo_user
-
-			return jsend.success({ comments: savedComment })
+			return jsend.success({ result: true })
 		} catch(error) {
 			console.log(error)
 			return jsend.error(translator.instance.translate('error_comments_save'))
