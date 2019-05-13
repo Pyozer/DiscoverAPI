@@ -156,9 +156,28 @@ router.route('/tags').get(tags.get_tags);
 // === REGISTER OUR ROUTES ===
 app.use('/api', router);
 
+var api_key = process.env.MAILGUN_API_KEY;
+var domain = process.env.MAILGUN_DOMAIN;
+console.log(`apikey: ${api_key}, domain: ${domain}`);
+var mailgun = require('mailgun-js')({
+  apiKey: api_key,
+  domain: domain
+});
+
+var data = {
+  from: 'adam.louis28@gmail.com',
+  to: 'adam.louis28@gmail.com',
+  subject: "Hello",
+  text: "Testing some MailGun awesomeness"
+};
+
+mailgun.messages().send(data, function (error, body) {
+  console.log(body)
+})
+
+
+
 // === START THE SERVER ===
 app.listen(port, (error) => {
     console.log('Server listening at port %d', port);
 });
-
-
