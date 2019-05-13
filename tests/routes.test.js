@@ -30,4 +30,13 @@ describe("APP Routes", () => {
 			expect(response.body).toEqual(expectedResult)
 		})
 	})
+
+	describe("Route /api/users/1/info", () => {
+		test("It should return a json error saying you are not allowed to use this route", async () => {
+			const response = await request(app).put('/api/users/1/logout').set({"Accept-Language": "fr-FR"})
+			const expectedResult = { "status": "error", "message": "Utilisateur non autorisé" }
+
+			expect(response.body).toEqual(expectedResult)
+		})
+	})
 })
