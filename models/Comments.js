@@ -1,5 +1,5 @@
 const jsend = require('jsend')
-const database = require('../services/database')
+const database = require('../services/Database')
 
 const translate = require('../utils/Translator')
 
