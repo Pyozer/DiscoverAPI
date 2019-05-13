@@ -9,7 +9,7 @@ let comments = new Comments()
 
 router.post('/', requireLogin, async (req, res) => {
 	const newPost = {
-		id_user: req.user,
+		id_user: req.user.id_user,
 		content_post: req.body.content_post,
 		photo_post: req.body.image_url,
 		latitude_post: parseFloat(req.body.latitude_post),
@@ -85,7 +85,7 @@ router.get('/:id_post/comments', requireLogin, async (req, res) => {
 router.post('/:id_post/comments', requireLogin, async (req, res) => {
 	const commentToSave = {
 		id_post: parseInt(req.params.id_post),
-		id_user: parseInt(req.user),
+		id_user: parseInt(req.user.id_user),
 		text_comment: req.body.text_comment,
 		date_comment: new Date().toISOString().slice(0, 19).replace('T', ' ')
 	}
