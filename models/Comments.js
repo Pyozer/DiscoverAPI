@@ -30,6 +30,8 @@ class Comments {
 	}
 
 	async save(comment) {
+		let userPosting;
+
 		try {
 			const sql_findUser = `
 				SELECT
@@ -39,7 +41,7 @@ class Comments {
 				FROM user
 				WHERE id_user = ?
 				LIMIT 1`
-			const userPosting = await database.instance.query(sql_findUser, [comment.id_user])
+			userPosting = await database.instance.query(sql_findUser, [comment.id_user])
 
 			if(!Object.keys(userPosting).length)
 				return jsend.error(translator.instance.translate('error_account_unknown'))
