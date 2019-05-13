@@ -31,4 +31,5 @@ module.exports = {
 	error_posts_delete: "Error deleting your post",
 
 	error_tag_get: "Error server getting all tags",
+	error_tags_empty: "You must provide minimum one tag"
 }

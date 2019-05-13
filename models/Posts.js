@@ -63,6 +63,7 @@ class Posts {
 					return jsend.success({posts: [{
 						id_post: postFound.id_post,
 						content_post: postFound.content_post,
+						info_post: postFound.info_post,
 						photo_post: postFound.photo_post,
 						date_post: postFound.date_post,
 						latitude_post: postFound.latitude_post,
@@ -90,6 +91,9 @@ class Posts {
 	}
 
 	async save(post, tags) {
+		if(tags.length == 0)
+			return jsend.error(translator.instance.translate('error_tags_empty'))
+
 		try {
 			const sql_savePost = 'INSERT INTO post SET ?'
 			const resultSavedPost = await database.instance.query(sql_savePost, post)

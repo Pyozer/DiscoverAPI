@@ -10,6 +10,7 @@ let comments = new Comments()
 router.post('/', requireLogin, async (req, res) => {
 	const newPost = {
 		id_user: req.user.id_user,
+		info_post: req.body.info_post,
 		content_post: req.body.content_post,
 		photo_post: req.body.image_url,
 		latitude_post: parseFloat(req.body.latitude_post),

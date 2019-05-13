@@ -31,4 +31,5 @@ module.exports = {
 	error_posts_delete: "Erreur suppression de votre publication",
 
 	error_tag_get: "Erreur serveur récupération de tous les filtres",
+	error_tags_empty: "Vous devez fournir au minimum un tag"
 }

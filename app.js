@@ -19,7 +19,7 @@ app.use( (req, res, next) => {
 })
 
 app.use( async (req, res, next) => {
-    const lang = req.headers["Accept-Language"]
+    const lang = req.acceptsLanguages()[0].replace('_','-').split('-')[0]
 		translator.instance.setLangage(lang)
 
 		req.user = undefined
