@@ -265,9 +265,11 @@ class Posts {
 	}
 
 	async like(idUser, idPost) {
+		let resultLikeFound;
+
 		try {
 			const sql_findLikeOnPost = `SELECT * FROM post_like WHERE id_user = ? AND id_post = ?`
-			const resultLikeFound = await database.instance.query(sql_findLikeOnPost, [idUser, idPost])
+			resultLikeFound = await database.instance.query(sql_findLikeOnPost, [idUser, idPost])
 		} catch(error) {
 			console.log(error)
 			return jsend.error(translator.instance.translate('error_likes_check'))
@@ -301,4 +303,5 @@ class Posts {
 		}
 	}
 }
+
 module.exports = Posts
