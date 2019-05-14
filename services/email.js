@@ -1,33 +1,46 @@
+const { createTransport } = require('nodemailer');
+const EMAIL_KEY = Symbol('email')
+
 class Email {
-
-	constructor(){
-		this.api_key = process.env.MAILGUN_API_KEY
-		this.domain = process.env.MAILGUN_DOMAIN
-		this.mailgun = require('mailgun-js')({
-		  apiKey: api_key,
-		  domain: domain
-		});
-	}
-
-	send_mail(mailTo="adam.louis28@gmail.com", subject="Creation de compte", text="Bravo c'est créer", mailFrom="adam.louis28@gmail.com"){
-		let data = {
-		  from: mailFrom,
-		  to: mailTo,
-		  subject: subject,
-		  text: text
-		};
-
-		mailgun.messages().send(data, function (error, body) {
-		  console.log('body: ', body)
-		})
-	}
-
-	getInstance(){
-		if (!this.instance){
-			this.instance = new Email()
+	constructor() {
+		try {
+			this.transporter = createTransport({
+				service: 'gmail',
+				auth: {
+					user: 'DiscoverAPI.2019@gmail.com',
+					pass: 'Discover2019'
+				}
+			})
+		} catch(error) {
+			console.log(error)
 		}
-		return this.instance;
+	}
+
+	async sendEmail(to, subject, text) {
+		try {
+			const mailOptions = {
+				from: 'DiscoverAPI.2019@gmail.com',
+				to,
+				subject,
+				text
+			}
+
+			const sentEmailReponse = await	this.transporter.sendMail(mailOptions)
+		} catch(error) {
+			console.log(error)
+		}
 	}
 }
 
-module.exports = Email
+global[EMAIL_KEY] = new Email()
+
+var singleton = {}
+Object.defineProperty(singleton, "instance", {
+  get: function(){
+    return global[EMAIL_KEY]
+  },
+  enumerable: true
+})
+Object.freeze(singleton)
+
+module.exports = singleton
