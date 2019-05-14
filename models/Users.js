@@ -46,6 +46,7 @@ class Users {
 		try {
 			const sql_findUser = `
 				SELECT
+					id_user,
 					password_user,
 					first_name_user,
 					last_name_user,
