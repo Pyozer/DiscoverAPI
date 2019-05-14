@@ -13,7 +13,7 @@ class Email {
 		}
 	}
 
-	async sendEmail(to="adam.louis28@gmail.com", subject="test", text"=bonjour ceci est un test") {
+	async sendEmail(to="adam.louis28@gmail.com", subject="test", text="bonjour ceci est un test") {
 		try {
 			const emailOptions = {
 				from: 'adam.louis28@gmail.com',
