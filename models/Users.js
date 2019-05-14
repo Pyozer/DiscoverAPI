@@ -17,8 +17,6 @@ class Users {
 
 			newUser.password_user = await bcrypt.hash(newUser.password_user, 10)
 			newUser.token_user = uuidv1()
-
-			email.instance.sendEmail(newUser.email_user, "Bienvenue sur Discover", "Coucou :)")
 		} catch(error) {
 			console.log(error)
 			return jsend.error(translator.instance.translate('error_account_checking'))
@@ -37,6 +35,7 @@ class Users {
 				photo_user: newUser.photo_user
 			}
 
+			email.instance.sendEmail(newUser.email_user, "Bienvenue sur Discover", "Coucou :)")
 			return jsend.success(registeredUser)
  		} catch(error) {
 			console.log(error)

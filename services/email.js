@@ -1,15 +1,12 @@
-const { createTransport } = require('nodemailer');
+const Mailgun = require('mailgun-js')
 const EMAIL_KEY = Symbol('email')
 
 class Email {
 	constructor() {
 		try {
-			this.transporter = createTransport({
-				service: 'gmail',
-				auth: {
-					user: 'DiscoverAPI.2019@gmail.com',
-					pass: 'Discover2019'
-				}
+			this.mailgun = new Mailgun({
+			 apiKey: process.env.MAILGUN_API_KEY,
+			 domain: process.env.MAILGUN_DOMAIN,
 			})
 		} catch(error) {
 			console.log(error)
@@ -18,14 +15,15 @@ class Email {
 
 	async sendEmail(to, subject, text) {
 		try {
-			const mailOptions = {
-				from: 'DiscoverAPI.2019@gmail.com',
+			const emailOptions = {
+				from: 'adam.louis28@gmail.com',
 				to,
 				subject,
 				text
 			}
 
-			const sentEmailReponse = await	this.transporter.sendMail(mailOptions)
+			const emailSentResponse = await this.mailgun.messages().send(emailOptions)
+			console.log(emailSentResponse)
 		} catch(error) {
 			console.log(error)
 		}
