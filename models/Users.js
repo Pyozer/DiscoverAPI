@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const uuidv1 = require('uuid/v1')
 
 const database = require('../services/Database')
+const email = require('../services/Email')
 const translator = require('../utils/Translator')
 
 class Users {
@@ -16,6 +17,8 @@ class Users {
 
 			newUser.password_user = await bcrypt.hash(newUser.password_user, 10)
 			newUser.token_user = uuidv1()
+
+			email.instance.sendEmail(newUser.email_user, "Bienvenue sur Discover", "Coucou :)")
 		} catch(error) {
 			console.log(error)
 			return jsend.error(translator.instance.translate('error_account_checking'))
