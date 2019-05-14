@@ -109,7 +109,7 @@ class Users {
 				photo_user
 			FROM user
 			WHERE id_user = ?`
-			const resultProfile = await database.instance.query(sql_profile, [idUser, idUser])
+			const resultProfile = await database.instance.query(sql_findProfile, [idUser, idUser])
 
 			if (resultProfile.length == 0)
 				return jsend.error(translator.instance.translate('error_account_unknown'))
