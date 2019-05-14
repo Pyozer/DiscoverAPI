@@ -42,7 +42,7 @@ class Users {
 	}
 
 	async login(email, password) {
-		let resultUser;
+		let resultUser
 		try {
 			const sql_findUser = `
 				SELECT
