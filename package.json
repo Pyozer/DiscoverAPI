@@ -8,10 +8,6 @@
     "dev": "nodemon server.js",
     "test": "yarn jest ./tests"
   },
-	"moduleDirectories": [
-    "node_modules",
-    ""
-	],
   "author": "",
   "license": "ISC",
   "dependencies": {
