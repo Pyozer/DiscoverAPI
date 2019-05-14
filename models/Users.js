@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt')
 const uuidv1 = require('uuid/v1')
 
 const database = require('../services/Database')
+const email = require('../services/Email')
 const translator = require('../utils/Translator')
 
 class Users {
@@ -34,6 +35,7 @@ class Users {
 				photo_user: newUser.photo_user
 			}
 
+			email.sendEmail(registeredUser.email_user, "Bienvenue sur Discover", "Coucou :)")
 			return jsend.success(registeredUser)
  		} catch(error) {
 			console.log(error)

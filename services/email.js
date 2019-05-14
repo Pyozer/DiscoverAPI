@@ -13,13 +13,13 @@ class Email {
 		}
 	}
 
-	async sendEmail(to="adam.louis28@gmail.com", subject="test", text="bonjour ceci est un test") {
+	async sendEmail(to, subject, text) {
 		try {
 			const emailOptions = {
 				from: 'adam.louis28@gmail.com',
-				to: to,
-				subject: subject,
-				text: text
+				to,
+				subject,
+				text
 			}
 
 			const emailSentResponse = await this.mailgun.messages().send(emailOptions)
