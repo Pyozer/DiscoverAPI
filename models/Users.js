@@ -42,6 +42,7 @@ class Users {
 	}
 
 	async login(email, password) {
+		let resultUser;
 		try {
 			const sql_findUser = `
 				SELECT
@@ -53,7 +54,7 @@ class Users {
 				FROM user
 				WHERE email_user = ?
 				LIMIT 1`
-			const resultUser = await database.instance.query(sql_findUser, [email])
+			resultUser = await database.instance.query(sql_findUser, [email])
 
 			if (resultUser.length == 0)
 				return jsend.error(translator.instance.translate('error_no_account'))
