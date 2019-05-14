@@ -36,7 +36,6 @@ class Database {
 					resolve(results)
 				})
 			} catch(error) {
-				connection.release()
 				return reject(error)
 			}
 		})
